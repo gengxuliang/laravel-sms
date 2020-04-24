@@ -1,0 +1,35 @@
+{
+  "name": "gengxuliang/laravel-sms",
+  "description": "EasySms Notification Channel for Laravel.",
+  "keywords": [
+    "laravel",
+    "notifications",
+    "easysms",
+    "laravel-sms"
+  ],
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "gengxuliang",
+      "email": "gxl8566@163.com"
+    }
+  ],
+  "require": {
+    "overtrue/easy-sms": "^1.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Gengxuliang\\LaravelSms\\": "src"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Gengxuliang\\LaravelSms\\LaravelSmsServiceProvider"
+      ]
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
