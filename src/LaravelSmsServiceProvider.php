@@ -10,6 +10,7 @@
 namespace Gengxuliang\LaravelSms;
 
 use Illuminate\Support\ServiceProvider;
+use Overtrue\EasySms\EasySms;
 
 class LaravelSmsServiceProvider extends ServiceProvider
 {
@@ -20,9 +21,9 @@ class LaravelSmsServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/easysms.php' => config_path('easysms.php'),
-                __DIR__.'/../database/migrations' => database_path('migrations'),
-            ],'Laravel-sms');
+                __DIR__ . '/../config/easysms.php'  => config_path('easysms.php'),
+                __DIR__ . '/../database/migrations' => database_path('migrations'),
+            ], 'Laravel-sms');
         }
     }
 
@@ -31,6 +32,14 @@ class LaravelSmsServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__ . '/../config/easysms.php', 'easysms');
 
+        $this->app->singleton(EasySms::class, function () {
+            $config  = config('easysms');
+            $easySms = new EasySms($config);
+            return $easySms;
+        });
+
+        $this->app->alias(EasySms::class, 'easysms');
     }
 }
